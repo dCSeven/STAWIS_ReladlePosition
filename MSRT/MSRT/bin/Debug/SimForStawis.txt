@@ -1,0 +1,111 @@
+// delayinloop n     wait n ms in Loops
+// delayonestep n    wait one time n ms
+// setladle l x y    move Ladle l to Pos. x y
+// move l n x y      execute n times: move Ladle l for x pixel horiz. and y pixel vert.
+// available a yes   set converter a to active state 
+// available a no    set converter a to inactive state
+// order cid wgt     new order mith charge cid and weight wgt
+// desulphready a    put next order from orderpool onto des.station a
+// desulphstart a    start of desulph.station a
+// desulphend a      stop of desulph.station a
+// transport         put charge from desulph to charging ladle, which have smallest distance to each other
+// converterstart a  process start at converter a
+// converterend a    process end at converter a
+// tappingstart a    tapping start at converter a
+// tappingend a      tapping end at converter a
+// charging on       charging start of converter, with smallest distance to charging ladle
+// charging off      charging end of converter, with smallest distance to charging ladle
+// movetodesulphreladling l s   move ladle l to desulphStation s
+// movetoconverterreladling l s   move ladle l to converter s
+// break             bricht einlesen ab
+//---------------------------------------------------
+delayinloop 5		// move-Befehle mit 5 ms Wartezeit
+order C01 60        // define new order
+order C02 70        // define new order
+order C03 80        // define new order
+
+delayonestep 500    // 500ms waiting time between sim. steps
+available 3 no      // disable converter 3
+delayonestep 500
+desulphready  1
+delayonestep 1000
+desulphready  2
+delayonestep 500
+desulphstart 1
+delayonestep 2000
+desulphend 1
+delayonestep 1000
+
+// chargierpfanne zur Entschwefelung bewegen
+// move 1 170 0 1
+// move 1 110 -1 0
+movetodesulphreladling 1 1		// ladle 1 to desulphurization 1
+delayonestep 1000
+
+// chargierpfanne befüllen
+transport
+delayonestep 1000
+
+// chargierpfanne zum Converter bewegen
+// move 1 170 1 0
+// move 1 210 0 -1
+movetoconverterreladling 1 1	// ladle 1 to converter 1
+delayonestep 2000
+
+charging on
+delayonestep 2000
+charging off
+delayonestep 1000
+
+converterstart 1
+move 1 30 0 1
+move 1 70 -1 0
+
+delayonestep 6000
+converterend 1
+delayonestep 2000
+tappingstart 1
+delayonestep 4000
+tappingend 1
+delayonestep 2000
+
+desulphstart 2
+delayonestep 2000
+desulphend 2
+delayonestep 1000
+
+// vor 2.Entschwefelung
+// bewege Chargierpfanne zur Entschwefelung 2
+// move 1 310 0 1
+// move 1 110 -1 0
+movetodesulphreladling 1 2	// ladle 1 to desulphurization 2
+// chargierpfanne befüllen
+delayonestep 1000
+transport
+delayonestep 2000
+
+chargierpfanne zu Converter 2 bewegen
+//move 1 80 1 0
+//move 1 230 1 -1
+//move 1 120 0 -1
+movetoconverterreladling 1 2	// ladle 1 to converter 2
+delayonestep 3000
+
+charging on
+delayonestep 3000
+charging off
+delayonestep 2000
+converterstart 2
+move 1 120 0 1
+move 1 190 -1 0
+move 1 90 0 -1
+
+delayonestep 7000
+converterend 2
+delayonestep 3000
+tappingstart 2
+delayonestep 5000
+tappingend 2
+delayonestep 2000
+
+
