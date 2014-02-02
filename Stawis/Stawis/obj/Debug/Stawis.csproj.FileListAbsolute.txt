@@ -77,3 +77,12 @@ C:\Users\Anton\Documents\arbeit\aSkripten\5-apr\LeiFe\Musterloesungen\Aufgabe4-R
 C:\Users\Anton\Documents\arbeit\aSkripten\5-apr\LeiFe\Musterloesungen\Aufgabe4-ReladlingStatons\Stawis\Stawis\obj\Debug\Stawis.csproj.GenerateResource.Cache
 C:\Users\Anton\Documents\arbeit\aSkripten\5-apr\LeiFe\Musterloesungen\Aufgabe4-ReladlingStatons\Stawis\Stawis\bin\Debug\Stawis.exe
 C:\Users\Anton\Documents\arbeit\aSkripten\5-apr\LeiFe\Musterloesungen\Aufgabe4-ReladlingStatons\Stawis\Stawis\bin\Debug\Stawis.pdb
+C:\Users\Florian\Documents\GitHub\STAWIS_ReladlePosition\Stawis\Stawis\bin\Debug\Stawis.exe.config
+C:\Users\Florian\Documents\GitHub\STAWIS_ReladlePosition\Stawis\Stawis\obj\Debug\Stawis.exe
+C:\Users\Florian\Documents\GitHub\STAWIS_ReladlePosition\Stawis\Stawis\obj\Debug\Stawis.pdb
+C:\Users\Florian\Documents\GitHub\STAWIS_ReladlePosition\Stawis\Stawis\bin\Debug\Stawis.exe
+C:\Users\Florian\Documents\GitHub\STAWIS_ReladlePosition\Stawis\Stawis\bin\Debug\Stawis.pdb
+C:\Users\Florian\Documents\GitHub\STAWIS_ReladlePosition\Stawis\Stawis\obj\Debug\Stawis.csprojResolveAssemblyReference.cache
+C:\Users\Florian\Documents\GitHub\STAWIS_ReladlePosition\Stawis\Stawis\obj\Debug\Stawis.Form1.resources
+C:\Users\Florian\Documents\GitHub\STAWIS_ReladlePosition\Stawis\Stawis\obj\Debug\Stawis.Properties.Resources.resources
+C:\Users\Florian\Documents\GitHub\STAWIS_ReladlePosition\Stawis\Stawis\obj\Debug\Stawis.csproj.GenerateResource.Cache

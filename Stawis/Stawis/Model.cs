@@ -388,6 +388,20 @@ namespace Stawis {
       sender.SendReladlingPositions(positions);
     }
 
+    public void requestLadlePosition(int LadleNumber)
+    {
+       Point position=new Point(-1,-1);
+       foreach(Station s in stations)
+        {
+    
+     //  Station s = getStation(LadleNumber);
+           if ((!(s is Ladle) || s.Number != LadleNumber)) continue;
+           position = s.Position;
+        }
+      sender.SendLadlePosition(position);
+      if (position.Equals(new Point(-1,-1)))newAlarm("requestLadlePosition: Falsche LadleNo: "+LadleNumber);
+    }
+
     public Boolean stationIsValid(int stNo) {
       if (stNo >= 0 && stNo < stations.Length) {
         return true;

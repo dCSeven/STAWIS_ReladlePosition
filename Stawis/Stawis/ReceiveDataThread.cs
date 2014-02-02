@@ -45,6 +45,7 @@ namespace Stawis {
                 case 17: tapping(); break;
                 case 18: setLadlePosition(); break;
                 case 40: model.requestReladlingPositions(); break;
+                case 50: model.requestLadlePosition(In.ReadInt()); break;
                 default:
                   break;
               }

@@ -13,8 +13,8 @@ namespace Stawis {
         private static UdpClient client;
 
         public SendMessage() {
-            Console.WriteLine("MSRT: Verbinden mit 127.0.0.1");
             string IP = "127.0.0.1";
+            Console.WriteLine("MSRT: Verbinden mit " + IP);
             remoteEndpoint = new IPEndPoint(IPAddress.Parse(IP), port);
             client = new UdpClient();
         }
@@ -33,5 +33,19 @@ namespace Stawis {
               client.Send(data, data.Length, remoteEndpoint);
           } catch (Exception e) { Console.WriteLine(e.Message); }
        }
+
+        public void SendLadlePosition(Point position)
+        {
+          string pos = "";
+          pos += position.X + " ";
+          pos += position.Y;
+          string msg = String.Format("{0:d2} {1}", 51, pos);
+          Console.WriteLine("SendDim: " + msg);
+          byte[] data = Encoding.UTF8.GetBytes(msg);
+          try {
+              client.Send(data, data.Length, remoteEndpoint);
+          } catch (Exception e) { Console.WriteLine(e.Message); }
+       }
+        
     }
 }

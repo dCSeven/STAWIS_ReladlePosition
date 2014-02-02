@@ -12,13 +12,15 @@ namespace MSRT {
     private static UdpClient client;
     private static int delay = 0;
     static Dimension[] reladlingPoints;
+    private static ReadMessage readMessage;
+
     static void Main(string[] args) {
       Console.WriteLine("Verbinden mit 127.0.0.1");
       string IP = "127.0.0.1";
 
       remoteEndpoint = new IPEndPoint(IPAddress.Parse(IP), port);
       client = new UdpClient();
-      ReadMessage readMessage = new ReadMessage(client);
+      readMessage = new ReadMessage(client);
 
       In.Open("SimForStawis.txt");
       if (!In.Done) {
@@ -147,15 +149,34 @@ namespace MSRT {
         Thread.Sleep(delay);
       }
     }
+    
 
     static void DoMoveToDesulphReladling() {
       int ladleNo = In.ReadInt();
       int desNo = In.ReadInt();
       int stationNo = desNo + 2;
-      int x = reladlingPoints[stationNo].Width;
-      int y = reladlingPoints[stationNo].Height;
-      string msg
-          = String.Format("{0:d2} {1:d2} {2:d4} {3:d4}", 18, ladleNo, x, y);
+      Vector destPoint = (Vector) reladlingPoints[stationNo];
+      Vector startingPoint = (Vector) readMessage.RequestLadlePosition(ladleNo);
+      Vector vec = destPoint - startingPoint;
+      int count = (int) Math.Ceiling(vec.Len());
+      string msg;
+      int xpart, ypart;
+      float x, y;
+      x = y = ypart = xpart = 0;
+      for (int i = 0; i < count - 1; i++)
+      {
+          x += vec.x / count;
+          y += vec.y / count;
+          xpart = (int)Math.Floor(x);
+          ypart = (int)Math.Floor(y);
+
+          msg = String.Format("{0:d2} {1:d2} {2:d4} {3:d4}", 14, ladleNo, xpart, ypart);
+          Send(msg);
+          x = x - xpart;
+          y = y - ypart;
+          Thread.Sleep(delay);
+      }
+      msg = String.Format("{0:d2} {1:d2} {2:d4} {3:d4}", 18, ladleNo, destPoint.x,destPoint.y);
       Send(msg);
     }
 
@@ -163,10 +184,29 @@ namespace MSRT {
       int ladleNo = In.ReadInt();
       int convNo = In.ReadInt();
       int stationNo = convNo -1;
-      int x = reladlingPoints[stationNo].Width;
-      int y = reladlingPoints[stationNo].Height;
-      string msg
-          = String.Format("{0:d2} {1:d2} {2:d4} {3:d4}", 18, ladleNo, x, y);
+      Vector destPoint = (Vector) reladlingPoints[stationNo];
+      Vector startingPoint = (Vector)readMessage.RequestLadlePosition(ladleNo);
+
+      Vector vec = destPoint - startingPoint;
+      int count = (int)Math.Ceiling(vec.Len());
+      string msg;
+      int xpart, ypart;
+      float x, y;
+      x = y = ypart = xpart = 0;
+      for (int i = 0; i < count - 1; i++)
+      {
+          x += vec.x/count;
+          y += vec.y / count;
+          xpart = (int) Math.Floor(x);
+          ypart = (int) Math.Floor(y);
+          
+          msg = String.Format("{0:d2} {1:d2} {2:d4} {3:d4}", 14, ladleNo, xpart ,ypart);
+          Send(msg);
+          x = x - xpart;
+          y = y - ypart;
+          Thread.Sleep(delay);
+      }
+      msg = String.Format("{0:d2} {1:d2} {2:d4} {3:d4}", 18, ladleNo, destPoint.x,destPoint.y);
       Send(msg);
     }
 

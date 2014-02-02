@@ -47,5 +47,36 @@ namespace MSRT {
             }
             return reladlingPoints;
         }
+        public Dimension RequestLadlePosition(int LadleNumber)
+        {
+            Dimension pos = new Dimension();
+            string msg = String.Format("{0:d2} {1}", 50, LadleNumber);
+            Program.Send(msg);
+
+            try
+            {
+                byte[] data = receiver.Receive(ref anyIP);
+                string text = Encoding.UTF8.GetString(data);
+                Console.WriteLine("nach GetString: " + text);
+                In.OpenString(text);
+                int msgNo = In.ReadInt();
+                if (msgNo == 51)
+                {
+                    pos.Width = In.ReadInt();
+                    pos.Height = In.ReadInt();
+                }
+                else
+                {
+                    Console.WriteLine(msgNo + " ungültig;  51 erwartet");
+                }
+                In.Close();
+            }
+            catch (Exception e1)
+            {
+                Console.WriteLine("Ausnahme: " + e1.Message);
+            }
+            return pos;
+        }
+
     }
 }

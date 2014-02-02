@@ -15,5 +15,10 @@ namespace MSRT {
             set { this.height = value; }
             get { return height; }
         }
+
+        public static explicit operator Vector(Dimension d)
+        {
+            return new Vector(d.Width,d.Height); 
+        }
     }
 }
